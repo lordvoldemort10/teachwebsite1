@@ -1,0 +1,70 @@
+// script.js
+
+// Voor een eenvoudige dynamische scroll-to-top functie
+document.addEventListener("DOMContentLoaded", function() {
+    // Maak een scroll-to-top knop zichtbaar wanneer de gebruiker naar beneden scrollt
+    const scrollTopButton = document.createElement("button");
+    scrollTopButton.textContent = "⬆";
+    scrollTopButton.classList.add("scroll-top");
+    document.body.appendChild(scrollTopButton);
+
+    // Zorg dat de knop alleen zichtbaar wordt na een bepaalde scrollpositie
+    window.addEventListener("scroll", function() {
+        if (window.scrollY > 300) {
+            scrollTopButton.classList.add("visible");
+        } else {
+            scrollTopButton.classList.remove("visible");
+        }
+    });
+
+    // Voeg scroll-naar-boven functionaliteit toe
+    scrollTopButton.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+});
+
+// Voor dynamische inhoud van de 'projecten' pagina
+function loadProjects() {
+    const projectsSection = document.querySelector(".project-gallery");
+
+    // Voorbeeldprojecten
+    const projects = [
+        {
+            image: "images/project_afbeelding.jpg",
+            title: "Werkstuk in Klei",
+            description: "Een project om leerlingen 3D-vormen te laten verkennen met klei."
+        },
+        {
+            image: "images/picasso_tekeningen.jpg",
+            title: "Picasso-stijl Tekening",
+            description: "Expressieve tekeningen geïnspireerd door de stijl van Picasso."
+        }
+    ];
+
+    // Dynamisch toevoegen van projecten
+    projects.forEach(project => {
+        const projectDiv = document.createElement("div");
+        projectDiv.classList.add("project");
+
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = project.title;
+
+        const title = document.createElement("h3");
+        title.textContent = project.title;
+
+        const desc = document.createElement("p");
+        desc.textContent = project.description;
+
+        projectDiv.appendChild(img);
+        projectDiv.appendChild(title);
+        projectDiv.appendChild(desc);
+
+        projectsSection.appendChild(projectDiv);
+    });
+}
+
+// Roep de functie aan als de projecten-pagina geladen wordt
+if (document.querySelector(".project-gallery")) {
+    loadProjects();
+}
