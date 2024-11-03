@@ -68,3 +68,19 @@ function loadProjects() {
 if (document.querySelector(".project-gallery")) {
     loadProjects();
 }
+// Scroll-to-Top Button Functionaliteit
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+window.onscroll = function () {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+};
+
+scrollTopBtn.onclick = function () {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+};
+
